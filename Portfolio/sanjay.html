@@ -1,0 +1,1503 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sanjay Kumar S | Portfolio</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/typed.js@2.0.16/dist/typed.umd.js"></script>
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+    <style>
+      :root {
+        --primary: #4f46e5;
+        --secondary: #8b5cf6;
+        --accent: #ec4899;
+        --background: #ffffff;
+        --text: #1f2937;
+        --card-bg: #f9fafb;
+        --card-border: #e5e7eb;
+      }
+
+      .dark {
+        --primary: #6366f1;
+        --secondary: #a78bfa;
+        --accent: #f472b6;
+        --background: #111827;
+        --text: #f9fafb;
+        --card-bg: #1f2937;
+        --card-border: #374151;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Poppins", sans-serif;
+        scroll-behavior: smooth;
+        transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+      }
+
+      body {
+        background-color: var(--background);
+        color: var(--text);
+      }
+
+      h1,
+      h2,
+      h3,
+      h4,
+      h5 {
+        font-family: "Space Grotesk", sans-serif;
+      }
+
+      .section {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.8s, transform 0.8s;
+      }
+
+      .section.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .btn {
+        position: relative;
+        overflow: hidden;
+        transition: all 0.3s;
+      }
+
+      .btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+      }
+
+      .btn::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 0;
+        height: 0;
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 50%;
+        transform: translate(-50%, -50%);
+        transition: width 0.5s, height 0.5s;
+      }
+
+      .btn:active::after {
+        width: 300px;
+        height: 300px;
+      }
+
+      .skill-bar {
+        height: 10px;
+        border-radius: 5px;
+        background: #e5e7eb;
+        overflow: hidden;
+        position: relative;
+      }
+
+      .skill-progress {
+        height: 100%;
+        border-radius: 5px;
+        background: linear-gradient(90deg, var(--primary), var(--secondary));
+        width: 0;
+        transition: width 1.5s ease-out;
+      }
+
+      .card {
+        background-color: var(--card-bg);
+        border: 1px solid var(--card-border);
+        transition: transform 0.3s, box-shadow 0.3s;
+      }
+
+      .card:hover {
+        transform: translateY(-5px) scale(1.02);
+        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
+          0 10px 10px -5px rgba(0, 0, 0, 0.04);
+      }
+
+      .timeline-item {
+        position: relative;
+      }
+
+      .timeline-item::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0;
+        height: 100%;
+        width: 2px;
+        background: linear-gradient(
+          to bottom,
+          var(--primary),
+          var(--secondary)
+        );
+      }
+
+      .timeline-dot {
+        position: absolute;
+        left: -8px;
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, var(--primary), var(--secondary));
+        top: 24px;
+      }
+
+      .animated-blob {
+        position: absolute;
+        border-radius: 50%;
+        filter: blur(40px);
+        opacity: 0.6;
+        animation: float 8s infinite ease-in-out;
+        z-index: -1;
+      }
+
+      @keyframes float {
+        0%,
+        100% {
+          transform: translate(0, 0) scale(1);
+        }
+        25% {
+          transform: translate(5%, 10%) scale(1.1);
+        }
+        50% {
+          transform: translate(10%, -5%) scale(0.9);
+        }
+        75% {
+          transform: translate(-5%, 5%) scale(1.05);
+        }
+      }
+
+      .theme-switch {
+        position: relative;
+        width: 60px;
+        height: 30px;
+        border-radius: 15px;
+        background-color: #4f46e5;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+
+      .theme-switch::after {
+        content: "☀️";
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        top: 2px;
+        left: 2px;
+        width: 26px;
+        height: 26px;
+        border-radius: 50%;
+        background-color: white;
+        transition: transform 0.3s;
+      }
+
+      .dark .theme-switch {
+        background-color: #6366f1;
+      }
+
+      .dark .theme-switch::after {
+        content: "🌙";
+        transform: translateX(30px);
+      }
+
+      .modal {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 1000;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.3s, visibility 0.3s;
+      }
+
+      .modal.active {
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .modal-content {
+        background-color: var(--card-bg);
+        padding: 2rem;
+        border-radius: 10px;
+        max-width: 600px;
+        width: 90%;
+        transform: scale(0.8);
+        transition: transform 0.3s;
+      }
+
+      .modal.active .modal-content {
+        transform: scale(1);
+      }
+
+      .success-message {
+        position: fixed;
+        bottom: -100px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: linear-gradient(135deg, var(--primary), var(--secondary));
+        color: white;
+        padding: 1rem 2rem;
+        border-radius: 10px;
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        z-index: 1000;
+        transition: bottom 0.5s;
+      }
+
+      .success-message.show {
+        bottom: 20px;
+      }
+
+      .confetti {
+        position: fixed;
+        width: 10px;
+        height: 10px;
+        background-color: #f00;
+        opacity: 0;
+        z-index: 999;
+      }
+
+      @keyframes parallax {
+        0% {
+          transform: translateY(0);
+        }
+        100% {
+          transform: translateY(-20px);
+        }
+      }
+
+      .parallax {
+        will-change: transform;
+      }
+
+      .profile-img {
+        position: relative;
+        overflow: hidden;
+        border-radius: 50%;
+        border: 4px solid var(--primary);
+        box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s;
+      }
+
+      .profile-img:hover {
+        transform: scale(1.05);
+      }
+
+      .social-icon {
+        transition: transform 0.3s, color 0.3s;
+      }
+
+      .social-icon:hover {
+        transform: translateY(-5px);
+        color: var(--accent);
+      }
+
+      /* Mobile responsive adjustments */
+      @media (max-width: 768px) {
+        .container {
+          padding-left: 1rem;
+          padding-right: 1rem;
+        }
+
+        .hero-content {
+          text-align: center;
+        }
+
+        .profile-img-container {
+          margin-bottom: 2rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navigation -->
+    <nav
+      class="fixed top-0 left-0 w-full bg-opacity-90 backdrop-blur-md z-50 shadow-md"
+      style="background-color: var(--background)"
+    >
+      <div
+        class="container mx-auto px-6 py-3 flex justify-between items-center"
+      >
+        <a
+          href="#"
+          class="text-2xl font-bold bg-gradient-to-r from-indigo-600 to-pink-500 text-transparent bg-clip-text"
+          >SK</a
+        >
+        <div class="hidden md:flex space-x-8">
+          <a href="#home" class="hover:text-indigo-600 transition-colors"
+            >Home</a
+          >
+          <a href="#about" class="hover:text-indigo-600 transition-colors"
+            >About</a
+          >
+          <a href="#skills" class="hover:text-indigo-600 transition-colors"
+            >Skills</a
+          >
+          <a href="#experience" class="hover:text-indigo-600 transition-colors"
+            >Experience</a
+          >
+          <a href="#projects" class="hover:text-indigo-600 transition-colors"
+            >Projects</a
+          >
+          <a href="#contact" class="hover:text-indigo-600 transition-colors"
+            >Contact</a
+          >
+        </div>
+        <div class="flex items-center space-x-4">
+          <div class="theme-switch" id="themeSwitch"></div>
+          <button class="md:hidden" id="menuBtn">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-6 w-6"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M4 6h16M4 12h16M4 18h16"
+              />
+            </svg>
+          </button>
+        </div>
+      </div>
+      <!-- Mobile menu -->
+      <div
+        class="md:hidden hidden"
+        id="mobileMenu"
+        style="background-color: var(--background)"
+      >
+        <div class="container mx-auto px-6 py-3 flex flex-col space-y-4">
+          <a href="#home" class="hover:text-indigo-600 transition-colors"
+            >Home</a
+          >
+          <a href="#about" class="hover:text-indigo-600 transition-colors"
+            >About</a
+          >
+          <a href="#skills" class="hover:text-indigo-600 transition-colors"
+            >Skills</a
+          >
+          <a href="#experience" class="hover:text-indigo-600 transition-colors"
+            >Experience</a
+          >
+          <a href="#projects" class="hover:text-indigo-600 transition-colors"
+            >Projects</a
+          >
+          <a href="#contact" class="hover:text-indigo-600 transition-colors"
+            >Contact</a
+          >
+        </div>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section
+      id="home"
+      class="min-h-screen flex items-center pt-16 relative overflow-hidden"
+    >
+      <!-- Animated blobs -->
+      <div
+        class="animated-blob w-64 h-64 bg-indigo-500 top-1/4 left-1/4"
+        style="animation-delay: 0s"
+      ></div>
+      <div
+        class="animated-blob w-80 h-80 bg-purple-500 bottom-1/4 right-1/4"
+        style="animation-delay: 2s"
+      ></div>
+      <div
+        class="animated-blob w-72 h-72 bg-pink-500 bottom-1/3 left-1/3"
+        style="animation-delay: 4s"
+      ></div>
+
+      <div class="container mx-auto px-6 py-12 relative z-10">
+        <div class="flex flex-col md:flex-row items-center justify-between">
+          <div class="md:w-3/4 hero-content">
+            <h1 class="text-4xl md:text-6xl font-bold mb-4">
+              <span class="block">Hi, I'm</span>
+              <span
+                class="bg-gradient-to-r from-indigo-600 to-pink-500 text-transparent bg-clip-text"
+                >Sanjay Kumar S</span
+              >
+            </h1>
+            <div class="text-xl md:text-2xl mb-6">
+              <span id="typewriter"></span>
+            </div>
+            <div class="flex flex-wrap gap-4">
+              <!-- <button id="downloadResume" class="btn bg-gradient-to-r from-indigo-600 to-purple-600 text-white px-6 py-3 rounded-full font-medium">
+                            Download Resume
+                        </button> -->
+              <a
+                href="assets/sanjay_resume.pdf"
+                download
+                class="btn bg-gradient-to-r from-indigo-600 to-purple-600 text-white px-6 py-3 rounded-full font-medium"
+              >
+                Download Resume
+              </a>
+
+              <a
+                href="#contact"
+                class="btn bg-gradient-to-r from-purple-600 to-pink-600 text-white px-6 py-3 rounded-full font-medium"
+              >
+                Contact Me
+              </a>
+            </div>
+          </div>
+          <div
+            class="md:w-1/2 flex justify-center mt-10 md:mt-0 profile-img-container"
+          >
+            <div class="profile-img w-64 h-64 md:w-80 md:h-80 overflow-hidden">
+              <!-- Replace with your actual photo -->
+              <img
+                src="./assets/sanjay_profile.jpg"
+                alt="Sanjay Kumar S."
+                class="w-full h-full object-cover justify-center items-center"
+              />
+              <svg
+                class="w-full h-full text-gray-300"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"
+                ></path>
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Me Section -->
+    <section id="about" class="py-20 relative section">
+      <div class="container mx-auto px-6">
+        <h2 class="text-3xl md:text-4xl font-bold mb-12 text-center">
+          <span
+            class="bg-gradient-to-r from-indigo-600 to-purple-600 text-transparent bg-clip-text"
+            >About Me</span
+          >
+        </h2>
+        <div class="card rounded-xl p-8 shadow-lg max-w-4xl mx-auto">
+          <div class="flex flex-col md:flex-row gap-8">
+            <div class="md:w-1/3">
+              <div
+                class="bg-gradient-to-br from-indigo-600 to-purple-600 p-1 rounded-lg"
+              >
+                <div class="bg-white dark:bg-gray-800 rounded-lg p-4">
+                    
+                  <h3 class="text-xl font-semibold mb-2">Education</h3>
+                  <p class="font-medium">Panimalar Engineering College</p>
+                  <p>B.Tech Computer Science And Business Systems</p>
+                  <p class="mt-2">
+                    CGPA: <span class="font-semibold">8.2</span>
+                  </p>
+                  <p>Pre-final Year</p>
+                </div>
+              </div>
+            </div>
+            <div class="md:w-2/3">
+              <h3 class="text-2xl font-bold mb-4">Who am I?</h3>
+              <p class="text-lg mb-4">
+                I'm a passionate tech enthusiast and aspiring Data Scientist
+                currently pursuing my B.Tech in Computer Science And Business
+                System at Panimalar Engineering College.
+              </p>
+              <p class="mb-4">
+                I'm driven by the desire to solve real-world problems through
+                data and code. My academic journey has equipped me with strong
+                analytical skills and a deep understanding of computer science
+                fundamentals.
+              </p>
+              <p>
+                When I'm not coding or analyzing data, I enjoy exploring new
+                technologies and contributing to open-source projects to expand
+                my knowledge and skills.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-20 bg-gray-50 dark:bg-gray-900 section">
+      <div class="container mx-auto px-6">
+        <h2 class="text-3xl md:text-4xl font-bold mb-12 text-center">
+          <span
+            class="bg-gradient-to-r from-purple-600 to-pink-600 text-transparent bg-clip-text"
+            >My Skills</span
+          >
+        </h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+          <!-- Languages -->
+          <div class="card rounded-xl p-6 shadow-lg">
+            <h3 class="text-xl font-bold mb-6 flex items-center">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-6 w-6 mr-2 text-indigo-600"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"
+                />
+              </svg>
+              Languages & Tools
+            </h3>
+            <div class="space-y-4">
+              <div>
+                <div class="flex justify-between mb-1">
+                  <span class="font-medium">Python</span>
+                  <span>60%</span>
+                </div>
+                <div class="skill-bar">
+                  <div class="skill-progress" data-width="60%"></div>
+                </div>
+              </div>
+              <div>
+                <div class="flex justify-between mb-1">
+                  <span class="font-medium">HTML</span>
+                  <span>75%</span>
+                </div>
+                <div class="skill-bar">
+                  <div class="skill-progress" data-width="75%"></div>
+                </div>
+              </div>
+              <div>
+                <div class="flex justify-between mb-1">
+                  <span class="font-medium">CSS</span>
+                  <span>75%</span>
+                </div>
+                <div class="skill-bar">
+                  <div class="skill-progress" data-width="75%"></div>
+                </div>
+              </div>
+              <div>
+                <div class="flex justify-between mb-1">
+                  <span class="font-medium">Git</span>
+                  <span>70%</span>
+                </div>
+                <div class="skill-bar">
+                  <div class="skill-progress" data-width="70%"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Frameworks -->
+          <div class="card rounded-xl p-6 shadow-lg">
+            <h3 class="text-xl font-bold mb-6 flex items-center">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-6 w-6 mr-2 text-purple-600"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"
+                />
+              </svg>
+              Frameworks & Skills
+            </h3>
+            <div class="space-y-4">
+              <div>
+                <div class="flex justify-between mb-1">
+                  <span class="font-medium">React (Basic)</span>
+                  <span>50%</span>
+                </div>
+                <div class="skill-bar">
+                  <div class="skill-progress" data-width="50%"></div>
+                </div>
+              </div>
+              <div>
+                <div class="flex justify-between mb-1">
+                  <span class="font-medium">Data Analysis</span>
+                  <span>60%</span>
+                </div>
+                <div class="skill-bar">
+                  <div class="skill-progress" data-width="60%"></div>
+                </div>
+              </div>
+              <div>
+                <div class="flex justify-between mb-1">
+                  <span class="font-medium">Problem Solving</span>
+                  <span>85%</span>
+                </div>
+                <div class="skill-bar">
+                  <div class="skill-progress" data-width="85%"></div>
+                </div>
+              </div>
+              <div>
+                <div class="flex justify-between mb-1">
+                  <span class="font-medium">Communication</span>
+                  <span>75%</span>
+                </div>
+                <div class="skill-bar">
+                  <div class="skill-progress" data-width="75%"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="py-20 section">
+      <div class="container mx-auto px-6">
+        <h2 class="text-3xl md:text-4xl font-bold mb-12 text-center">
+          <span
+            class="bg-gradient-to-r from-indigo-600 to-purple-600 text-transparent bg-clip-text"
+            >Internship Experience</span
+          >
+        </h2>
+
+        <div class="max-w-4xl mx-auto">
+          <div class="timeline-item pl-10 pb-10 relative">
+            <div class="timeline-dot"></div>
+            <div class="card rounded-xl p-6 shadow-lg">
+              <div class="flex flex-col md:flex-row justify-between mb-4">
+                <h3 class="text-xl font-bold">BHH Technologies Pvt Ltd</h3>
+                <span class="text-indigo-600 font-medium">Bangalore</span>
+              </div>
+              <p class="text-sm mb-4 text-gray-500 dark:text-gray-400">
+                June 2023 - August 2023
+              </p>
+              <ul class="space-y-2 list-disc list-inside">
+                <li>
+                  Extracted & refined training data from PST files using Python
+                </li>
+                <li>Developed a basic skill-search webpage for candidates</li>
+                <li>
+                  Analyzed workplace challenges and proposed innovative
+                  solutions
+                </li>
+                <li>
+                  Collaborated with cross-functional teams to improve data
+                  processing workflows
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="timeline-item pl-10 relative">
+            <div class="timeline-dot"></div>
+            <div class="card rounded-xl p-6 shadow-lg border-dashed">
+              <div class="flex justify-center items-center h-32">
+                <p class="text-center text-gray-500 dark:text-gray-400">
+                  Ready for my next opportunity!
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-20 bg-gray-50 dark:bg-gray-900 section">
+      <div class="container mx-auto px-6">
+        <h2 class="text-3xl md:text-4xl font-bold mb-12 text-center">
+          <span
+            class="bg-gradient-to-r from-purple-600 to-pink-600 text-transparent bg-clip-text"
+            >Projects & Papers</span
+          >
+        </h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <!-- Paper Presentation -->
+          <div class="card rounded-xl overflow-hidden shadow-lg">
+            <div
+              class="h-48 bg-gradient-to-r from-indigo-500 to-purple-600 flex items-center justify-center"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-20 w-20 text-white"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                />
+              </svg>
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-bold mb-2">
+                Research Paper Presentation
+              </h3>
+              <p class="mb-4">Presented at Panimalar Engineering College</p>
+              <p class="text-sm text-gray-500 dark:text-gray-400 mb-4">
+                Certified by HOD Dr. Anuradha & Guide Ancy Jose
+              </p>
+              <button
+                class="btn bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg w-full project-modal-btn"
+                data-modal="paperModal"
+              >
+                View Details
+              </button>
+            </div>
+          </div>
+
+          <!-- Project 1 (Placeholder) -->
+          <div class="card rounded-xl overflow-hidden shadow-lg">
+            <div
+              class="h-48 bg-gradient-to-r from-purple-500 to-pink-600 flex items-center justify-center"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-20 w-20 text-white"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"
+                />
+              </svg>
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-bold mb-2">Data Analysis Project</h3>
+              <p class="mb-4">Python-based data visualization and analysis</p>
+              <p class="text-sm text-gray-500 dark:text-gray-400 mb-4">
+                Academic Project
+              </p>
+              <button
+                class="btn bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-lg w-full project-modal-btn"
+                data-modal="project1Modal"
+              >
+                View Details
+              </button>
+            </div>
+          </div>
+
+          <!-- Project 2 (Placeholder) -->
+          <div class="card rounded-xl overflow-hidden shadow-lg">
+            <div
+              class="h-48 bg-gradient-to-r from-pink-500 to-red-600 flex items-center justify-center"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-20 w-20 text-white"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"
+                />
+              </svg>
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-bold mb-2">Web Development</h3>
+              <p class="mb-4">Responsive portfolio website</p>
+              <p class="text-sm text-gray-500 dark:text-gray-400 mb-4">
+                Personal Project
+              </p>
+              <button
+                class="btn bg-pink-600 hover:bg-pink-700 text-white px-4 py-2 rounded-lg w-full project-modal-btn"
+                data-modal="project2Modal"
+              >
+                View Details
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 section">
+      <div class="container mx-auto px-6">
+        <h2 class="text-3xl md:text-4xl font-bold mb-12 text-center">
+          <span
+            class="bg-gradient-to-r from-indigo-600 to-purple-600 text-transparent bg-clip-text"
+            >Get In Touch</span
+          >
+        </h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-6xl mx-auto">
+          <!-- Contact Info -->
+          <div class="card rounded-xl p-8 shadow-lg">
+            <h3 class="text-2xl font-bold mb-6">Contact Information</h3>
+
+            <div class="space-y-6">
+              <div class="flex items-center">
+                <div
+                  class="w-12 h-12 rounded-full bg-indigo-100 dark:bg-indigo-900 flex items-center justify-center mr-4"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-6 w-6 text-indigo-600 dark:text-indigo-400"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                    />
+                  </svg>
+                </div>
+                <div>
+                  <p class="text-sm text-gray-500 dark:text-gray-400">Email</p>
+                  <p class="font-medium">sanjaykumar03022006@gmail.com</p>
+                </div>
+              </div>
+
+              <div class="flex items-center">
+                <div
+                  class="w-12 h-12 rounded-full bg-indigo-100 dark:bg-indigo-900 flex items-center justify-center mr-4"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-6 w-6 text-indigo-600 dark:text-indigo-400"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
+                    />
+                  </svg>
+                </div>
+                <div>
+                  <p class="text-sm text-gray-500 dark:text-gray-400">Phone</p>
+                  <p class="font-medium">+91 7810027588</p>
+                </div>
+              </div>
+
+              <div class="flex items-center">
+                <div
+                  class="w-12 h-12 rounded-full bg-indigo-100 dark:bg-indigo-900 flex items-center justify-center mr-4"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-6 w-6 text-indigo-600 dark:text-indigo-400"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                    />
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+                    />
+                  </svg>
+                </div>
+                <div>
+                  <p class="text-sm text-gray-500 dark:text-gray-400">
+                    Location
+                  </p>
+                  <p class="font-medium">Chennai, Tamil Nadu, India</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="mt-8">
+              <h4 class="text-lg font-semibold mb-4">Connect with me</h4>
+              <div class="flex space-x-4">
+                <a
+                  href="https://www.linkedin.com/in/sanjay-kumar-s-9903a0297"
+                  target="_blank"
+                  class="social-icon"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-8 w-8"
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"
+                    />
+                  </svg>
+                </a>
+                <a
+                  href="https://github.com/SanjayKumar-hub"
+                  target="_blank"
+                  class="social-icon"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-8 w-8"
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"
+                    />
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Contact Form -->
+          <div class="card rounded-xl p-8 shadow-lg">
+            <h3 class="text-2xl font-bold mb-6">Send Me a Message</h3>
+
+            <form id="contactForm" class="space-y-6">
+              <div>
+                <label for="name" class="block text-sm font-medium mb-2"
+                  >Your Name</label
+                >
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  class="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:bg-gray-800"
+                  required
+                />
+              </div>
+
+              <div>
+                <label for="email" class="block text-sm font-medium mb-2"
+                  >Your Email</label
+                >
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  class="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:bg-gray-800"
+                  required
+                />
+              </div>
+
+              <div>
+                <label for="message" class="block text-sm font-medium mb-2"
+                  >Your Message</label
+                >
+                <textarea
+                  id="message"
+                  name="message"
+                  rows="5"
+                  class="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:bg-gray-800"
+                  required
+                ></textarea>
+              </div>
+
+              <button
+                type="submit"
+                class="btn w-full bg-gradient-to-r from-indigo-600 to-purple-600 text-white py-3 rounded-lg font-medium"
+              >
+                Send Message
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-10">
+      <div class="container mx-auto px-6">
+        <div class="flex flex-col md:flex-row justify-between items-center">
+          <div class="mb-6 md:mb-0">
+            <h3 class="text-2xl font-bold mb-2">Sanjay Kumar S.</h3>
+            <p class="text-gray-400">
+              Aspiring Data Scientist | Tech Enthusiast
+            </p>
+          </div>
+
+          <div class="mb-6 md:mb-0">
+            <span class="flex items-center space-x-2">
+              <img
+                src="./assets/PEC_logo.png"
+                alt="Panimalar Engineering College"
+                class="h-12"
+              />
+
+              <span>Panimalar Engineering College</span>
+            </span>
+          </div>
+
+          <div class="flex space-x-4">
+            <a
+              href="https://www.linkedin.com/in/sanjay-kumar-s-9903a0297"
+              target="_blank"
+              class="social-icon"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-6 w-6"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"
+                />
+              </svg>
+            </a>
+            <a
+              href="https://github.com/SanjayKumar-hub"
+              target="_blank"
+              class="social-icon"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-6 w-6"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"
+                />
+              </svg>
+            </a>
+            <a href="mailto:sanjaykumar03022006@gmail.com" class="social-icon">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-6 w-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                />
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <div class="border-t border-gray-800 mt-8 pt-8 text-center">
+          <p>Built with ❤ by Sanjay Kumar S.</p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Modals -->
+    <!-- Paper Modal -->
+    <div id="paperModal" class="modal">
+      <div class="modal-content">
+        <div class="flex justify-between items-center mb-4">
+          <h3 class="text-2xl font-bold">Research Paper Presentation</h3>
+          <button class="modal-close">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-6 w-6"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M6 18L18 6M6 6l12 12"
+              />
+            </svg>
+          </button>
+        </div>
+        <div>
+          <p class="mb-4">
+            Presented a research paper on emerging technologies in data science
+            at Panimalar Engineering College.
+          </p>
+          <p class="mb-4">
+            The paper explored innovative approaches to data analysis and
+            visualization techniques that can be applied to solve real-world
+            problems.
+          </p>
+          <p class="mb-2 font-semibold">Certification:</p>
+          <p>
+            Certified by HOD Dr. Anuradha and Guide Ancy Jose for outstanding
+            research and presentation skills.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Project 1 Modal -->
+    <div id="project1Modal" class="modal">
+      <div class="modal-content">
+        <div class="flex justify-between items-center mb-4">
+          <h3 class="text-2xl font-bold">Data Analysis Project</h3>
+          <button class="modal-close">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-6 w-6"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M6 18L18 6M6 6l12 12"
+              />
+            </svg>
+          </button>
+        </div>
+        <div>
+          <p class="mb-4">
+            A comprehensive data analysis project using Python, Pandas, and
+            visualization libraries.
+          </p>
+          <p class="mb-4">
+            The project involved collecting, cleaning, and analyzing large
+            datasets to extract meaningful insights and create interactive
+            visualizations.
+          </p>
+          <p class="mb-2 font-semibold">Technologies used:</p>
+          <ul class="list-disc list-inside mb-4">
+            <li>Python</li>
+            <li>Pandas</li>
+            <li>Matplotlib</li>
+            <li>Seaborn</li>
+          </ul>
+          <p class="text-sm text-gray-500 dark:text-gray-400">
+            Academic project completed as part of coursework
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Project 2 Modal -->
+    <div id="project2Modal" class="modal">
+      <div class="modal-content">
+        <div class="flex justify-between items-center mb-4">
+          <h3 class="text-2xl font-bold">Web Development Project</h3>
+          <button class="modal-close">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-6 w-6"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M6 18L18 6M6 6l12 12"
+              />
+            </svg>
+          </button>
+        </div>
+        <div>
+          <p class="mb-4">
+            Designed and developed a responsive portfolio website to showcase
+            skills and projects.
+          </p>
+          <p class="mb-4">
+            The website features modern design elements, animations, and is
+            fully responsive across all devices.
+          </p>
+          <p class="mb-2 font-semibold">Technologies used:</p>
+          <ul class="list-disc list-inside mb-4">
+            <li>HTML5</li>
+            <li>CSS3</li>
+            <li>JavaScript</li>
+            <li>Responsive Design</li>
+          </ul>
+          <p class="text-sm text-gray-500 dark:text-gray-400">
+            Personal project to improve web development skills
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Success Message -->
+    <div id="successMessage" class="success-message">
+      <div class="flex items-center">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-6 w-6 mr-2"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M5 13l4 4L19 7"
+          />
+        </svg>
+        <span>Message sent successfully!</span>
+      </div>
+    </div>
+
+    <script>
+      // Theme Switcher
+      const themeSwitch = document.getElementById("themeSwitch");
+      const body = document.body;
+
+      // Check for saved theme preference or use device preference
+      const savedTheme =
+        localStorage.getItem("theme") ||
+        (window.matchMedia("(prefers-color-scheme: dark)").matches
+          ? "dark"
+          : "light");
+
+      if (savedTheme === "dark") {
+        body.classList.add("dark");
+      }
+
+      themeSwitch.addEventListener("click", () => {
+        body.classList.toggle("dark");
+        const theme = body.classList.contains("dark") ? "dark" : "light";
+        localStorage.setItem("theme", theme);
+      });
+
+      // Mobile Menu Toggle
+      const menuBtn = document.getElementById("menuBtn");
+      const mobileMenu = document.getElementById("mobileMenu");
+
+      menuBtn.addEventListener("click", () => {
+        mobileMenu.classList.toggle("hidden");
+      });
+
+      // Scroll Animation
+      const sections = document.querySelectorAll(".section");
+
+      const observerOptions = {
+        root: null,
+        rootMargin: "0px",
+        threshold: 0.1,
+      };
+
+      const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+
+            // Animate skill bars if this is the skills section
+            if (entry.target.id === "skills") {
+              const skillBars =
+                entry.target.querySelectorAll(".skill-progress");
+              skillBars.forEach((bar) => {
+                const width = bar.getAttribute("data-width");
+                setTimeout(() => {
+                  bar.style.width = width;
+                }, 200);
+              });
+            }
+          }
+        });
+      }, observerOptions);
+
+      sections.forEach((section) => {
+        observer.observe(section);
+      });
+
+      // Typewriter Effect
+      document.addEventListener("DOMContentLoaded", function () {
+        new Typed("#typewriter", {
+          strings: [
+            "Aspiring Data Scientist",
+            "Tech Enthusiast",
+            "Problem Solver",
+          ],
+          typeSpeed: 50,
+          backSpeed: 30,
+          backDelay: 2000,
+          loop: true,
+        });
+      });
+
+      // Modal Functionality
+      const modalBtns = document.querySelectorAll(".project-modal-btn");
+      const modals = document.querySelectorAll(".modal");
+      const modalCloses = document.querySelectorAll(".modal-close");
+
+      modalBtns.forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const modalId = btn.getAttribute("data-modal");
+          const modal = document.getElementById(modalId);
+          modal.classList.add("active");
+        });
+      });
+
+      modalCloses.forEach((close) => {
+        close.addEventListener("click", () => {
+          const modal = close.closest(".modal");
+          modal.classList.remove("active");
+        });
+      });
+
+      modals.forEach((modal) => {
+        modal.addEventListener("click", (e) => {
+          if (e.target === modal) {
+            modal.classList.remove("active");
+          }
+        });
+      });
+
+      // Contact Form Submission
+      const contactForm = document.getElementById("contactForm");
+      const successMessage = document.getElementById("successMessage");
+
+      contactForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        // In a real implementation, you would send the form data to a server
+        // For demo purposes, we'll just show the success message
+
+        // Show success message
+        successMessage.classList.add("show");
+
+        // Create confetti effect
+        createConfetti();
+
+        // Reset form
+        contactForm.reset();
+
+        // Hide success message after 3 seconds
+        setTimeout(() => {
+          successMessage.classList.remove("show");
+        }, 3000);
+      });
+
+      // Confetti Animation
+      function createConfetti() {
+        const confettiCount = 100;
+        const colors = ["#4f46e5", "#8b5cf6", "#ec4899", "#3b82f6", "#10b981"];
+
+        for (let i = 0; i < confettiCount; i++) {
+          const confetti = document.createElement("div");
+          confetti.classList.add("confetti");
+          confetti.style.backgroundColor =
+            colors[Math.floor(Math.random() * colors.length)];
+          confetti.style.left = Math.random() * 100 + "vw";
+          confetti.style.top = "-10px";
+          confetti.style.width = Math.random() * 10 + 5 + "px";
+          confetti.style.height = Math.random() * 10 + 5 + "px";
+          confetti.style.opacity = Math.random() + 0.5;
+          confetti.style.transform = `rotate(${Math.random() * 360}deg)`;
+
+          document.body.appendChild(confetti);
+
+          // Animate confetti
+          const animationDuration = Math.random() * 3 + 2;
+          confetti.animate(
+            [
+              { transform: `translate(0, 0) rotate(0deg)`, opacity: 1 },
+              {
+                transform: `translate(${Math.random() * 100 - 50}px, ${
+                  window.innerHeight
+                }px) rotate(${Math.random() * 360}deg)`,
+                opacity: 0,
+              },
+            ],
+            {
+              duration: animationDuration * 1000,
+              easing: "cubic-bezier(0.1, 0.8, 0.3, 1)",
+            }
+          );
+
+          // Remove confetti after animation
+          setTimeout(() => {
+            confetti.remove();
+          }, animationDuration * 1000);
+        }
+      }
+
+      // Resume Download Button
+      const downloadResumeBtn = document.getElementById("downloadResume");
+
+      downloadResumeBtn.addEventListener("click", () => {
+        // In a real implementation, this would download the actual resume file
+        alert(
+          "To implement this functionality, replace this alert with a link to your actual resume file."
+        );
+      });
+
+      // Parallax Effect
+      window.addEventListener("scroll", () => {
+        const parallaxElements = document.querySelectorAll(".parallax");
+        parallaxElements.forEach((element) => {
+          const scrollPosition = window.pageYOffset;
+          const speed = element.getAttribute("data-speed") || 0.5;
+          element.style.transform = `translateY(${scrollPosition * speed}px)`;
+        });
+      });
+    </script>
+    <script>
+      (function () {
+        function c() {
+          var b = a.contentDocument || a.contentWindow.document;
+          if (b) {
+            var d = b.createElement("script");
+            d.innerHTML =
+              "window.__CF$cv$params={r:'9622aa8a21b79a78',t:'MTc1MzAxNjY4NS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";
+            b.getElementsByTagName("head")[0].appendChild(d);
+          }
+        }
+        if (document.body) {
+          var a = document.createElement("iframe");
+          a.height = 1;
+          a.width = 1;
+          a.style.position = "absolute";
+          a.style.top = 0;
+          a.style.left = 0;
+          a.style.border = "none";
+          a.style.visibility = "hidden";
+          document.body.appendChild(a);
+          if ("loading" !== document.readyState) c();
+          else if (window.addEventListener)
+            document.addEventListener("DOMContentLoaded", c);
+          else {
+            var e = document.onreadystatechange || function () {};
+            document.onreadystatechange = function (b) {
+              e(b);
+              "loading" !== document.readyState &&
+                ((document.onreadystatechange = e), c());
+            };
+          }
+        }
+      })();
+    </script>
+  </body>
+</html>
